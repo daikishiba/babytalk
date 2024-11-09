@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import styles from '../../styles/chatapp.module.css';
 import OpenAI from 'openai';
-import StarFall from './starfall';
 
 const ChatApp: React.FC = () => {
   const [nickname, setNickname] = useState<string>('');
@@ -74,7 +73,6 @@ const ChatApp: React.FC = () => {
 
   return (
     <body className={styles.appBody}>
-		<StarFall />
 		<div className={styles.appContainer}>
 				<h1 className={styles.header}>Baby Talk with AI</h1>
 					<input

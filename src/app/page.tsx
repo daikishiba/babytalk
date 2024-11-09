@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-	<body>
 		<form>
 		<div>
 		{/* ヘッダーセクション */}
@@ -41,7 +40,5 @@ export default function Home() {
 		</section>
 		</div>
 		</form>
-	</body>
-    
   );
 };

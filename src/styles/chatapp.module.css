@@ -39,6 +39,12 @@
     box-sizing: border-box;
 }
 
+.input:focus {
+    border-color: #ffaff3; /* ピンク色の枠線を保持 */
+    outline: none; /* ブラウザデフォルトの青色の枠線を削除 */
+	transform: scaleX(1.05);
+}
+
 .button {
     background-color: #4caf50; 
     color: white;

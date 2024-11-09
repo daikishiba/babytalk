@@ -1,0 +1,28 @@
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+    background: linear-gradient(to right, #f9ab3d 0%, #f955ad 100%);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0px;
+    display: flex;
+	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* 中央揃え */
+	justify-content: center; /* 必要に応じて縦方向の中央揃えも */
+	width: 100%; /* 全幅 */
+	padding: 20px; /* 任意の余白 */
+	box-sizing: border-box; /* パディングを含めて幅を計算 */
+}

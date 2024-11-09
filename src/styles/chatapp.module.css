@@ -1,0 +1,76 @@
+/* styles.module.css */
+
+.appBody {
+    background: linear-gradient(to right, #f9ab3d 0%, #f955ad 100%);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.appContainer {
+    width: 90%;
+    max-width: 600px;
+    background-color: #ffffff; /* 白い背景でコンテンツを明るく */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    color: #ff69b4; /* 明るいピンク色のヘッダー */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 50%;
+    padding: 10px;
+    border: 2px solid #ffaff3; /* ピンク色の枠線 */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.button {
+    background-color: #4caf50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:disabled {
+    background-color: #ccc;
+}
+
+.button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.conversationCount {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.messageSection {
+    background-color: #e6e6fa; /* 淡いラベンダー色のメッセージセクション */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.audioSection {
+    margin-top: 20px;
+}

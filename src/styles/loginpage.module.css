@@ -1,0 +1,61 @@
+.body {
+	background: linear-gradient(to right, #f9ab3d 0%, #f955ad 100%);
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+.form {
+	background: white;
+	padding: 50px; /* 内側の余白を増やす */
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 300px;
+  }
+  
+.label {
+	display: block; /* ラベルをブロック要素にしてマージンが有効に */
+	margin-bottom: 8px; /* ラベルと入力欄の間隔を適切に設定 */
+	font-weight: bold;
+	color: #333;
+  }
+  
+.input {
+	border: 2px solid #ffaff3;
+	border-radius: 4px;
+	padding: 12px; /* テキスト入力のパディングを増やす */
+	font-size: 16px;
+	margin-bottom: 16px; /* 入力欄間のマージンを追加 */
+  }
+  
+.input:focus {
+	border-color: #ffaff3;
+	outline: none;
+  }
+  
+.button {
+	background-color: #fb7ef7;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	padding: 12px; /* ボタンのパディングを増やす */
+	cursor: pointer;
+	transition: background 0.3s ease;
+  }
+  
+.button:hover {
+	background-color: #f131d1;
+  }
+  
+  /* メディアクエリを使用して、レスポンシブ対応を提供 */
+  @media (max-width: 600px) {
+	.form {
+	  width: 90%;
+	  padding: 20px;
+	}
+  }

@@ -32,3 +32,37 @@
 	text-decoration: underline;
   }
   
+  .button {
+	/* 共通のボタンスタイル */
+	padding: 10px;
+	border: none;
+	background-color: #ffffff00;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+	margin: 2px;
+	font-size: 16px; /* フォントサイズを統一 */
+	display: inline-block; /* ボタン全体をクリック可能に */
+  }
+  
+  .link {
+	text-decoration: none;
+	color: inherit; /* ボタン内の文字色を継承 */
+  }
+  
+  .form button {
+	/* form 内のボタンも同じスタイルを適用 */
+	padding: 10px;
+	border: none;
+	background-color: #ffffff00;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+	margin: 2px;
+	font-size: 16px; /* フォントサイズを統一 */
+	display: inline-block; /* ボタン全体をクリック可能に */
+  }
+  
+  .form button:hover {
+	text-decoration: underline;
+  }

@@ -1,14 +1,26 @@
-
 import styles from '../../styles/header.module.css';
+import { logout } from '../logout/actions';
 
 function Header() {
   return (
     <header className={styles.header}>
-      <h1>Baby Talk with AI</h1>
+      <h1>Baby Talk AI</h1>
       <nav className={styles.nav}>
-        <a href="/">Home</a>
-        <a href="/login">Sign up / Log in</a>
-        <a href="/contact">Contact</a>
+        <button className={styles.button}>
+          <a href="/" className={styles.link}>Home</a>
+        </button>
+        <button className={styles.button}>
+          <a href="/signup" className={styles.link}>Sign up</a>
+        </button>
+        <button className={styles.button}>
+          <a href="/login" className={styles.link}>Log in</a>
+        </button>
+        <form className={styles.form} action={logout}>
+          <button type="submit" className={styles.button}>Log out</button>
+        </form>
+        <button className={styles.button}>
+          <a href="/contact" className={styles.link}>Contact</a>
+        </button>
       </nav>
     </header>
   );

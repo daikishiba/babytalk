@@ -1,3 +1,4 @@
+
 import { redirect } from 'next/navigation'
 import ChatApp from '../../chat/chatapp'
 

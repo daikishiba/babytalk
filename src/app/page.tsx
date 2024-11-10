@@ -1,10 +1,22 @@
+'use client'
+
 import React from 'react';
 import Link from 'next/link';
 import styles from '../styles/homepage.module.css'
-
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  return (
+	const [hasMounted, setHasMounted] = useState(false);
+  
+	useEffect(() => {
+	  setHasMounted(true);
+	}, []);
+  
+	if (!hasMounted) {
+	  return null; // Prevents rendering on the server side to avoid hydration error
+	}
+	
+	return (
 		<div className={styles.homepageContainer}>
 			{/* ビジュアルと機能紹介セクション */}
 			<section>
@@ -40,7 +52,7 @@ export default function Home() {
 			{/* コール・トゥ・アクション (CTA) セクション */}
 			<section>
 				<h2>今すぐAIと話してみましょう！</h2>
-				<Link href="/signup" passHref>
+				<Link href="/login" passHref>
 				<button>無料で体験</button>
 				</Link>
 			</section>

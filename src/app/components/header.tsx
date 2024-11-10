@@ -10,12 +10,9 @@ function Header() {
           <a href="/" className={styles.link}>Home</a>
         </button>
         <button className={styles.button}>
-          <a href="/signup" className={styles.link}>Sign up</a>
-        </button>
-        <button className={styles.button}>
           <a href="/login" className={styles.link}>Log in</a>
         </button>
-        <form className={styles.form} action={logout}>
+		<form className={styles.form} action={logout}>
           <button type="submit" className={styles.button}>Log out</button>
         </form>
         <button className={styles.button}>

@@ -35,15 +35,29 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
+  const pathname = request.nextUrl.pathname
+
   if (
     !user &&
     !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
+    !request.nextUrl.pathname.startsWith('/auth') &&
+	request.nextUrl.pathname !== '/'
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
-    url.pathname = '/login'
+    url.pathname = '/'
     return NextResponse.redirect(url)
+  }
+
+  if (user && pathname.startsWith('/private')) {
+    const requestedUserId = pathname.split('/')[2] // "/userid" の userid を取得
+    //console.log(requestedUserId)
+	if (requestedUserId && requestedUserId !== user.id) {
+      // 他のユーザーのページを見ようとした場合はアクセス拒否
+      const url = request.nextUrl.clone()
+      url.pathname = '/error' // アクセス拒否ページにリダイレクト (例: 403ページ)
+      return NextResponse.redirect(url)
+    }
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're

@@ -13,7 +13,7 @@ export default function LoginPage() {
 			<input
 				className={styles.input}
 				id="password" name="password" type="password" 
-				placeholder='Enter your password' required />
+				placeholder='At least 6 characters' required />
 			<button className={styles.button} formAction={login}>Log in</button>
 			<button className={styles.button} formAction={signup}>Sign up</button>
     	</form>

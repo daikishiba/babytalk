@@ -23,7 +23,7 @@ export default function Home() {
 				<div>
 					<h2>Baby Talk AIについて</h2>
 					<p>
-						Baby Talk AIは2歳以下のお話を始める前の子供を対象としたChat botです。<br/>
+						Baby Talk AIは2歳以下のお話を始める前の子供に話しかけるChat botです。<br/>
 						子供の名前や愛称で楽しく話しかけ、褒める言葉、動物のお話、質問を組み合わせて、子供の想像力を広げます。
 					</p>
 				</div>

@@ -24,6 +24,26 @@
     align-items: center;
 }
 
+.image_bounce {
+	width: 50%; /* Default size, adjustable */
+	height: auto; /* Maintain aspect ratio */
+	margin-top: 20px; /* Add space below the header */
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	animation: bounce 1.5s ease-in-out infinite; /* Bouncing animation */
+  }
+  
+  /* Animation for bouncing effect */
+  @keyframes bounce {
+	0%, 100% {
+	  transform: translateY(0);
+	}
+	50% {
+	  transform: translateY(-20px);
+	}
+  }
+
 .header {
     color: #ff69b4; /* 明るいピンク色のヘッダー */
     font-size: 24px;

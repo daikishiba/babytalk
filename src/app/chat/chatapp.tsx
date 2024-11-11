@@ -39,6 +39,7 @@ const ChatApp: React.FC = () => {
             role: 'user',
             content: `子供の愛称「${nickname}」に向けて以下の３つを混ぜて楽しく話しかけてください。
                       また日本語の後に同じ内容を英語でも生成してください。
+					  日本語のテキストが生成できたら、改行して英語のテキストを続けてください。
                       「わかりました」や「もちろんです」などはいりません。
                       1;子供を褒めるポジティブな言葉
                       2;動物のお話
@@ -49,7 +50,7 @@ const ChatApp: React.FC = () => {
 
       const messageContent = completion.choices[0].message.content ?? 'メッセージが生成されませんでした。';
       setMessage(messageContent);
-      setMessages(prevMessages => [...prevMessages, messageContent]);
+      //setMessages(prevMessages => [...prevMessages, messageContent]);
 
       // 音声生成
       const mp3 = await openai.audio.speech.create({
@@ -73,18 +74,22 @@ const ChatApp: React.FC = () => {
 
   return (
 		<div className={styles.appContainer}>
-				<h1 className={styles.header}>Baby Talk with AI</h1>
+				<img 
+					src='/frog.img.png'
+					alt="A cheerful baby or AI interaction illustration" 
+					className={styles.image_bounce}
+				/>
 					<input
 					className={styles.input}
 					type="text"
 					value={nickname}
 					onChange={handleChange}
 					placeholder="子供の愛称を入力してください"/>
-				<button className={styles.button} onClick={handleSubmit} disabled={loading || conversationCount >= 5}>
+				<button className={styles.button} onClick={handleSubmit}>
 				{loading ? '生成中...' : '話しかける'}
 				</button>
 
-				<p className={styles.conversationCount}>現在の会話回数: {conversationCount}/5</p>
+				<p className={styles.conversationCount}>現在の会話回数: {conversationCount}</p>
 
 				{messages.map((msg, index) => (
 					<div key={index} className={styles.messageSection}><p>{msg}</p></div>

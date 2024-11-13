@@ -13,7 +13,7 @@ export async function logout(formData: FormData) {
       console.error('Logout error:', error.message);
     } else {
       // ログアウト後にホームページなどにリダイレクト
-      console.log("logout")
+      //console.log("logout")
 	  revalidatePath('/', 'layout')
 	  redirect('/')
     }

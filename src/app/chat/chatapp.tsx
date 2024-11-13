@@ -10,7 +10,6 @@ const ChatApp: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
   const [conversationCount, setConversationCount] = useState<number>(0);
-  const [messages, setMessages] = useState<string[]>([]);
 
   const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
@@ -91,9 +90,7 @@ const ChatApp: React.FC = () => {
 
 				<p className={styles.conversationCount}>現在の会話回数: {conversationCount}</p>
 
-				{messages.map((msg, index) => (
-					<div key={index} className={styles.messageSection}><p>{msg}</p></div>
-				))}
+				{message && <div className="message-section"><p>{message}</p></div>}
 				{audioSrc && (
 					<div className={styles.audioSection}>
 					<audio controls src={audioSrc}>

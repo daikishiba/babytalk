@@ -6,10 +6,11 @@ import { User } from "@supabase/supabase-js";
 
 interface HeaderProps {
 	user: User | null;
+	userId: string | undefined
   }
 
 
-const Header: React.FC<HeaderProps>  = ({user}) => {
+const Header: React.FC<HeaderProps>  = ({user, userId}) => {
 
   return (
     <header className={styles.header}>
@@ -22,6 +23,10 @@ const Header: React.FC<HeaderProps>  = ({user}) => {
           <a href="/login" className={styles.link}>Log in</a>
         </button>
 		{user && (
+			<button className={styles.button}>
+			<a href={`/private/${userId}`} className={styles.link}>Chat</a>
+			</button>)}
+		{user && (
 			<form className={styles.form} action={logout}>
 				<button type="submit" className={styles.button}>Log out</button>
 			</form>
@@ -32,3 +37,4 @@ const Header: React.FC<HeaderProps>  = ({user}) => {
 }
 
 export default Header;
+

@@ -13,6 +13,7 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.46.1",
+    "lucide-react": "^0.456.0",
     "next": "15.0.2",
     "openai": "^4.71.0",
     "react": "19.0.0-rc-02c0e824-20241028",

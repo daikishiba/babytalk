@@ -19,7 +19,8 @@ const ChatApp: React.FC = () => {
   }
 
   const openai = new OpenAI({
-    apiKey: apiKey, dangerouslyAllowBrowser: true
+    apiKey: apiKey,
+	dangerouslyAllowBrowser: true
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +29,11 @@ const ChatApp: React.FC = () => {
 
   const handleSubmit = async () => {
     if (!nickname) return;
+
+	const themes = ["かわいい動物", "かっこいい乗り物", "おいしい食べ物"];
+	const randomNumber = Math.floor(Math.random() * 9) + 1;
+	const theme = themes[randomNumber % 3];
+
     setLoading(true);
     try {
       const completion = await openai.chat.completions.create({
@@ -36,13 +42,9 @@ const ChatApp: React.FC = () => {
           { role: 'system', content: 'You are a helpful assistant.' },
           {
             role: 'user',
-            content: `子供の愛称「${nickname}」に向けて以下の３つを混ぜて楽しく話しかけてください。
-                      また日本語の後に同じ内容を英語でも生成してください。
-					  日本語のテキストが生成できたら、改行して英語のテキストを続けてください。
-                      「わかりました」や「もちろんです」などはいりません。
-                      1;子供を褒めるポジティブな言葉
-                      2;動物のお話
-                      3;子供への質問`,
+            content: `子供の愛称「${nickname}」に向けて褒める言葉、${theme}、子供への質問を混ぜて５文程度で楽しく話しかけてください。
+					  日本語のテキストが完成したら、同じ内容を英語でも作成してください。
+                      「わかりました」や「もちろんです」などはいりません。`,
           },
         ],
       });

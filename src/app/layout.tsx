@@ -18,11 +18,12 @@ export default async function RootLayout({
 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  const userId = user?.id
 
   return (
     <html lang="en">
 	  <body>
-		<Header user={user}/>
+		<Header user={user} userId={userId}/>
 		  <main>{children}</main>
 		<Footer />
 	  </body>

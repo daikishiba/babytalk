@@ -11,67 +11,46 @@ const ChatApp: React.FC = () => {
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
   const [conversationCount, setConversationCount] = useState<number>(0);
 
-  const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
-
-  if (typeof apiKey !== 'string') {
-    console.error('Invalid API Key: Make sure to set VITE_OPENAI_API_KEY in your environment variables.');
-    return null;
-  }
-
-  const openai = new OpenAI({
-    apiKey: apiKey,
-	dangerouslyAllowBrowser: true
-  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
 
   const handleSubmit = async () => {
-    if (!nickname) return;
+		if (!nickname) return;
 
-	const themes = ["かわいい動物", "かっこいい乗り物", "おいしい食べ物"];
-	const randomNumber = Math.floor(Math.random() * 9) + 1;
-	const theme = themes[randomNumber % 3];
+		const themes = ["かわいい動物", "かっこいい乗り物", "おいしい食べ物"];
+		const randomNumber = Math.floor(Math.random() * 9) + 1;
+		const theme = themes[randomNumber % 3];
 
-    setLoading(true);
-    try {
-      const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: 'You are a helpful assistant.' },
-          {
-            role: 'user',
-            content: `子供の愛称「${nickname}」に向けて褒める言葉、${theme}、子供への質問を混ぜて５文程度で楽しく話しかけてください。
-					  日本語のテキストが完成したら、同じ内容を英語でも作成してください。
-                      「わかりました」や「もちろんです」などはいりません。`,
-          },
-        ],
-      });
+		setLoading(true);
 
-      const messageContent = completion.choices[0].message.content ?? 'メッセージが生成されませんでした。';
-      setMessage(messageContent);
-      //setMessages(prevMessages => [...prevMessages, messageContent]);
+		try {
+			const response = await fetch('/api/chat', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ nickname, theme }),
+			});
 
-      // 音声生成
-      const mp3 = await openai.audio.speech.create({
-        model: "tts-1",
-        voice: "alloy",
-        input: messageContent,
-      });
-      const audioArrayBuffer = await mp3.arrayBuffer();
-      const blob = new Blob([audioArrayBuffer], { type: 'audio/mp3' });
-      const url = URL.createObjectURL(blob);
-      setAudioSrc(url);
+			if (!response.ok) {
+				throw new Error('API response was not OK');
+			}
+			const { message, audio } = await response.json();
 
-      setConversationCount(prevCount => prevCount + 1);
-    } catch (error) {
-      console.error('Error generating message or audio:', error);
-      setMessage('エラーが発生しました。もう一度試してください。');
-    } finally {
-      setLoading(false);
-    }
-  };
+			setMessage(message);
+			setAudioSrc(audio);
+
+			setConversationCount(prevCount => prevCount + 1);
+		} catch (error) {
+		console.error('Error generating message or audio:', error);
+		setMessage('エラーが発生しました。もう一度試してください。');
+		} finally {
+		setLoading(false);
+		}
+	};
+  
 
   return (
 		<div className={styles.appContainer}>

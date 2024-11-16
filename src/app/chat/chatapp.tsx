@@ -9,7 +9,7 @@ const ChatApp: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
-  const [conversationCount, setConversationCount] = useState<number>(0);
+  const [conversationCount, setConversationCount] = useState<number>();
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,13 +41,30 @@ const ChatApp: React.FC = () => {
 
 			setMessage(message);
 			setAudioSrc(audio);
+		} catch (chatError) {
+			console.error('Error in chat API:', chatError);
+			setMessage('会話生成に失敗しました');
+		}
 
-			setConversationCount(prevCount => prevCount + 1);
+		try {
+			const countResponse = await fetch('/api/count', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json'
+				 },
+				
+			  });
+			if (!countResponse.ok) {
+				throw new Error('Count API response was not OK');
+			}
+			const { conversationCount } = await countResponse.json();
+			console.log(conversationCount);
+    		setConversationCount(conversationCount);
+
 		} catch (error) {
-		console.error('Error generating message or audio:', error);
-		setMessage('エラーが発生しました。もう一度試してください。');
+			console.error('Error setting conversation count:', error);
+			setMessage('API count error');
 		} finally {
-		setLoading(false);
+			setLoading(false);
 		}
 	};
   

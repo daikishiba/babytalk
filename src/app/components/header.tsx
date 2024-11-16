@@ -19,13 +19,13 @@ const Header: React.FC<HeaderProps>  = ({user, userId}) => {
         <button className={styles.button}>
           <a href="/" className={styles.link}>Home</a>
         </button>
-        <button className={styles.button}>
-          <a href="/login" className={styles.link}>Log in</a>
-        </button>
 		{user && (
 			<button className={styles.button}>
 			<a href={`/private/${userId}`} className={styles.link}>Chat</a>
 			</button>)}
+        <button className={styles.button}>
+          <a href="/login" className={styles.link}>Log in</a>
+        </button>
 		{user && (
 			<form className={styles.form} action={logout}>
 				<button type="submit" className={styles.button}>Log out</button>

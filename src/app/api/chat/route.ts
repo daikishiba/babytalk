@@ -22,15 +22,14 @@ export async function POST(req: NextRequest) {
 
     // Generate chat completion
     const chatResponse = await openai.chat.completions.create({
-      model: 'gpt-4', // 確実に使用可能なモデル名を指定
+      model: "gpt-4o-mini", // 確実に使用可能なモデル名を指定
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
         {
           role: 'user',
-          content: `まだお話できない赤ちゃんに対して、褒める言葉、${theme}についてのお話を混ぜて5文程度で楽しく話しかけてください。
+          content: `まだお話できない赤ちゃんに対して、褒める言葉、${theme}についてのお話を混ぜて英語で5文程度で楽しく話しかけてください。
                     最後に${theme}に関する質問も１つしてください。
                     子供の愛称は「${nickname}」です。
-                    日本語のテキストが完成したら、同じ内容を英語でも作成してください。
                     「わかりました」や「もちろんです」などはいりません。`,
         },
       ],

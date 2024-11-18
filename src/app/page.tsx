@@ -53,7 +53,7 @@ export default function Home() {
 				<div className={styles.devContainer}>
 					<h2 className={styles.h2}>今後の展望</h2>
 					<p>
-						AIは育児領域で様々な価値を提供できる可能性を秘めています。<br/><br/>
+						初めての開発を通じて、AIは育児領域で様々な価値を提供できる可能性があると感じています。<br/><br/>
 						例えば数年後には子供のお気に入りのおもちゃにLLMが搭載され、子供と話してくれるようになるのではないでしょうか。<br/>
 						<br/>
 						Baby Talk AIを体験していただき、感想や要望がありましたら是非以下のメールアドレスにご連絡ください。<br/><br/>

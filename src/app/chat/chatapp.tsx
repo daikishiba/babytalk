@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styles from '../../styles/chatapp.module.css';
 import OpenAI from 'openai';
+import { UndoIcon } from 'lucide-react';
 
 const ChatApp: React.FC = () => {
   const [nickname, setNickname] = useState<string>('');
@@ -82,7 +83,16 @@ const ChatApp: React.FC = () => {
 					value={nickname}
 					onChange={handleChange}
 					placeholder="子供の愛称を入力してください"/>
-				<button className={styles.button} onClick={handleSubmit}>
+				<button className={`${styles.button} ${loading ? styles.blinking : ''}` }
+					onClick={() => {
+						if (conversationCount === undefined || conversationCount <= 50) {
+							handleSubmit();
+						} else {
+							alert('会話回数が上限に達しました。');
+						}
+					}}
+					disabled={conversationCount !== undefined && conversationCount > 50}
+				>
 				{loading ? '生成中...' : '話しかける'}
 				</button>
 

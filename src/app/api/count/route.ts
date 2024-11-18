@@ -13,15 +13,11 @@ export async function POST () {
 			return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
 		}
 
-		let { data: user, error: tableError } = await supabase
+		let { data: user } = await supabase
 		.from('users-count') // テーブル名に合わせて変更
 		.select('id, conversationCount')
 		.eq('id', userId)
 		.single();
-
-		if(tableError){
-			console.log(tableError);
-		}
 
 		if (user === null) {
 		// ユーザーが存在しない場合、新規作成

@@ -19,7 +19,9 @@ export async function POST () {
 		.eq('id', userId)
 		.single();
 
-		console.log("user=", user);
+		if(error){
+			console.log(error);
+		}
 
 		if (user === null) {
 		// ユーザーが存在しない場合、新規作成

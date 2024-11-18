@@ -2,6 +2,7 @@
 import styles from '../../styles/header.module.css';
 import { logout } from '../logout/actions';
 import { User } from "@supabase/supabase-js";
+import Link from 'next/link';
 
 
 interface HeaderProps {
@@ -17,14 +18,14 @@ const Header: React.FC<HeaderProps>  = ({user, userId}) => {
       <h1>Baby Talk AI</h1>
       <nav className={styles.nav}>
         <button className={styles.button}>
-          <a href="/" className={styles.link}>Home</a>
+          <Link href="/" className={styles.link}>Home</Link>
         </button>
 		{user && (
 			<button className={styles.button}>
-			<a href={`/private/${userId}`} className={styles.link}>Chat</a>
+			<Link href={`/private/${userId}`} className={styles.link}>Chat</Link>
 			</button>)}
         <button className={styles.button}>
-          <a href="/login" className={styles.link}>Log in</a>
+          <Link href="/login" className={styles.link}>Log in</Link>
         </button>
 		{user && (
 			<form className={styles.form} action={logout}>

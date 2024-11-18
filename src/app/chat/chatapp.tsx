@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import styles from '../../styles/chatapp.module.css';
-import OpenAI from 'openai';
-import { UndoIcon } from 'lucide-react';
 
 const ChatApp: React.FC = () => {
   const [nickname, setNickname] = useState<string>('');

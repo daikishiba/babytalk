@@ -8,8 +8,6 @@ const ChatApp: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
-  const [conversationCount, setConversationCount] = useState<number>();
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);

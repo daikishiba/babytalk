@@ -44,30 +44,11 @@ const ChatApp: React.FC = () => {
 			console.error('Error in chat API:', chatError);
 			setMessage('会話生成に失敗しました');
 		}
-
-		try {
-			const countResponse = await fetch('/api/count', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json'
-				 },
-				
-			  });
-			if (!countResponse.ok) {
-				throw new Error('Count API response was not OK');
-			}
-			const { conversationCount } = await countResponse.json();
-			console.log(conversationCount);
-    		setConversationCount(conversationCount);
-
-		} catch (error) {
-			console.error('Error setting conversation count:', error);
-			setMessage('API count error');
-		} finally {
+		finally {
 			setLoading(false);
 		}
 	};
   
-
   return (
 		<div className={styles.appContainer}>
 				<img 
@@ -81,21 +62,9 @@ const ChatApp: React.FC = () => {
 					value={nickname}
 					onChange={handleChange}
 					placeholder="子供の愛称を入力してください"/>
-				<button className={`${styles.button} ${loading ? styles.blinking : ''}` }
-					onClick={() => {
-						if (conversationCount === undefined || conversationCount <= 50) {
-							handleSubmit();
-						} else {
-							alert('会話回数が上限に達しました。');
-						}
-					}}
-					disabled={conversationCount !== undefined && conversationCount > 50}
-				>
+				<button onClick={handleSubmit} className={`${styles.button} ${loading ? styles.blinking : ''}` }>
 				{loading ? '生成中...' : '話しかける'}
 				</button>
-
-				<p className={styles.conversationCount}>現在の会話回数: {conversationCount}</p>
-
 				{message && <div className="message-section"><p>{message}</p></div>}
 				{audioSrc && (
 					<div className={styles.audioSection}>

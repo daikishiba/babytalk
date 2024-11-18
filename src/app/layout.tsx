@@ -1,7 +1,6 @@
 import Header from "./components/header"
 import Footer from "./components/footer"
 import '../styles/index.css'
-import { GetServerSideProps } from "next"
 import { createClient } from "@/utils/supabase/server"
 
 

@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import styles from '../styles/homepage.module.css';
 import { useEffect, useState } from 'react';
-import { Mail } from 'lucide-react'
 
 export default function Home() {
 	const [hasMounted, setHasMounted] = useState(false);

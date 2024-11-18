@@ -110,3 +110,12 @@
 .audioSection {
     margin-top: 20px;
 }
+
+.message_section {
+	display: flex;
+	flex-direction: column; /* 縦方向に並べる */
+	align-items: center;    /* 横方向を中央揃え */
+	justify-content: center; /* 縦方向を中央揃え */
+	text-align: center;      /* テキストを中央揃え */
+	margin: 0 auto;          /* セクション全体を中央寄せ */
+}

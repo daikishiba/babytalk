@@ -38,42 +38,9 @@ export async function POST(req: NextRequest) {
 
     const messageContent = chatResponse.choices[0]?.message?.content ?? 'メッセージが生成されませんでした。';
 
-    // Generate audio
-    const audioResponse = await openai.audio.speech.create({
-      model: 'tts-1',
-      voice: 'alloy',
-      input: messageContent,
-    });
-
-    const audioArrayBuffer = await audioResponse.arrayBuffer();
-    const audioBlob = Buffer.from(audioArrayBuffer);
-
-    return new Response(
-      JSON.stringify({
-        message: messageContent,
-        audio: `data:audio/mp3;base64,${audioBlob.toString('base64')}`,
-      }),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': origin || '', // 呼び出し元のオリジンを許可
-        },
-      }
-    );
-  } catch (error) {
-    let errorMessage = 'An unknown error occurred.';
-
-    // 型ガードを使ってエラーを特定
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-
-    console.error('Error in API route:', error);
-
-    return NextResponse.json(
-      { error: 'Error processing the request.', details: errorMessage },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: messageContent }, { status: 200 });
+  } catch (error: any) {
+    console.error('Error generating message:', error);
+    return NextResponse.json({ error: 'Failed to generate message.', details: error.message }, { status: 500 });
   }
 }

@@ -32,8 +32,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       audio: `data:audio/mp3;base64,${audioBlob.toString('base64')}`,
     });
-  } catch (error: any) {
-    console.error('Error in Audio API:', error);
-    return NextResponse.json({ error: 'Error generating audio.' }, { status: 500 });
+  } catch (error) {
+    if (error instanceof Error) {
+		console.error('Error in Audio API:', error.message);
+		return NextResponse.json({ error: 'Error generating audio.' }, { status: 500 });
+	  }
+  
+	  console.error('Unexpected error:', error);
+	  return NextResponse.json({ error: 'Unexpected error occurred.' }, { status: 500 });
+	}
   }
-}

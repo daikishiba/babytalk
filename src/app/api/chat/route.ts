@@ -39,8 +39,13 @@ export async function POST(req: NextRequest) {
     const messageContent = chatResponse.choices[0]?.message?.content ?? 'メッセージが生成されませんでした。';
 
     return NextResponse.json({ message: messageContent }, { status: 200 });
-  } catch (error: any) {
-    console.error('Error generating message:', error);
-    return NextResponse.json({ error: 'Failed to generate message.', details: error.message }, { status: 500 });
+  } catch (error) {
+    if (error instanceof Error) {
+		console.error('Error in Text API:', error.message);
+		return NextResponse.json({ error: 'Error generating text.' }, { status: 500 });
+	  }
+  
+	  console.error('Unexpected error:', error);
+	  return NextResponse.json({ error: 'Unexpected error occurred.' }, { status: 500 });
+	}
   }
-}

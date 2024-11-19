@@ -10,33 +10,15 @@ export default function LoginPage() {
   useEffect(() => {
     // Load the Google reCAPTCHA script
     const script = document.createElement('script')
-    script.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit'
+    script.src = 'https://www.google.com/recaptcha/api.js'
     script.async = true
     script.defer = true
     document.body.appendChild(script)
-
-    // Define the global callback for reCAPTCHA
-    const globalWindow = window as Window & {
-		onRecaptchaLoad?: () => void
-		grecaptcha?: {
-		  render: (container: string, params: { sitekey: string; callback: (token: string) => void }) => void
-		}
-	  }
-    globalWindow.onRecaptchaLoad = () => {
-      if (globalWindow.grecaptcha) {
-        globalWindow.grecaptcha.render('recaptcha-container', {
-          sitekey: '6Lfub4MqAAAAAFtNnc96c6E53EyWBRZoJOyfQR7y', // Replace with your actual site key
-          callback: (token: string) => setRecaptchaToken(token), // Set token on successful verification
-        })
-      }
-    }
-
-    return () => {
-      // Clean up the script
-      document.body.removeChild(script)
-      delete globalWindow.onRecaptchaLoad
-    }
   }, [])
+
+  const handleRecaptcha = (token: string) => {
+    setRecaptchaToken(token)
+  }
 
   return (
     <form className={styles.form}>
@@ -50,21 +32,17 @@ export default function LoginPage() {
         className={styles.input}
         id="password" name="password" type="password" 
         placeholder='At least 6 characters' required />
-      <div id="recaptcha-container" className="g-recaptcha"></div>
+      <div
+        className="g-recaptcha"
+        data-sitekey="6Lfub4MqAAAAAFtNnc96c6E53EyWBRZoJOyfQR7y" // Replace with your actual site key
+        data-callback="handleRecaptcha"
+      />
       <button
         className={styles.button}
-        type="submit"
-        onClick={(e) => {
-          e.preventDefault()
-          signup(new FormData(e.target as HTMLFormElement), recaptchaToken)
-        }}>Sign up</button>
+        formAction={(formData) => signup(formData, recaptchaToken)}>Sign up</button>
       <button
         className={styles.button}
-        type="submit"
-        onClick={(e) => {
-          e.preventDefault()
-          login(new FormData(e.target as HTMLFormElement), recaptchaToken)
-        }}>Log in</button>
+        formAction={(formData) => login(formData, recaptchaToken)}>Log in</button>
     </form>
   )
 }

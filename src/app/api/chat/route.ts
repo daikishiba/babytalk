@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
-const allowedOrigins = ['https://babytalk.vercel.app']; // 許可するドメイン
+const allowedOrigins = ['https://www.babytalkwithai.com/']; // 許可するドメイン
 
 export async function POST(req: NextRequest) {
   try {

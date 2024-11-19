@@ -13,12 +13,18 @@ export default function LoginPage() {
     script.src = 'https://www.google.com/recaptcha/api.js'
     script.async = true
     script.defer = true
-    document.body.appendChild(script)
-  }, [])
+    document.body.appendChild(script);
 
-  const handleRecaptcha = (token: string) => {
-    setRecaptchaToken(token)
-  }
+	const globalWindow = window as Window & { handleRecaptcha?: (token: string) => void }
+    globalWindow.handleRecaptcha = (token: string) => {
+      setRecaptchaToken(token)
+    }
+
+    return () => {
+      // Clean up the global callback
+      delete globalWindow.handleRecaptcha
+    }
+  }, [])
 
   return (
     <form className={styles.form}>

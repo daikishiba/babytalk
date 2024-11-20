@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps>  = ({user, userId}) => {
 
   return (
     <header className={styles.header}>
-      <h1>Baby Talk AI</h1>
+      <h1>Baby Talk with AI</h1>
       <nav className={styles.nav}>
         <button className={styles.button}>
           <Link href="/" className={styles.link}>Home</Link>

@@ -9,6 +9,8 @@ const ChatApp: React.FC = () => {
   const [loadingChat, setLoadingChat] = useState<boolean>(false);
   const [loadingAudio, setLoadingAudio] = useState<boolean>(false);
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
+  const [conversationCount, setConversationCount] = useState<number>();
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
@@ -72,7 +74,27 @@ const ChatApp: React.FC = () => {
     } finally {
       setLoadingAudio(false);
     }
+
+	try {
+		const countResponse = await fetch('/api/count', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json'
+			 },
+			
+		  });
+		if (!countResponse.ok) {
+			throw new Error('Count API response was not OK');
+		}
+		const { conversationCount } = await countResponse.json();
+		console.log(conversationCount);
+		setConversationCount(conversationCount);
+
+	} catch (error) {
+		console.error('Error setting conversation count:', error);
+		setMessage('API count error');
+	}
   };
+
 
   return (
     <div className={styles.appContainer}>
@@ -88,6 +110,7 @@ const ChatApp: React.FC = () => {
         onChange={handleChange}
         placeholder="子供の愛称を入力してください"
       />
+	  <p className={styles.conversationCount}>現在の会話回数: {conversationCount}</p>
       <button 
         onClick={handleChatSubmit} 
         className={`${styles.button} ${loadingChat ? styles.blinking : ''}`}

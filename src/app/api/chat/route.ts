@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         { role: 'system', content: 'You are a helpful assistant.' },
         {
           role: 'user',
-          content: `まだお話できない赤ちゃんに対して、褒める言葉、${theme}についてのお話を混ぜて5文程度で楽しく話しかけてください。
+          content: `かわいい赤ちゃんに対して、褒める言葉、${theme}についてのお話を混ぜて5文程度で楽しく話しかけてください。
 		  			日本語で文章を生成した後で、同じ内容を英語でも生成してください。
                     子供の愛称は「${nickname}」です。
                     「わかりました」や「もちろんです」などはいりません。`,

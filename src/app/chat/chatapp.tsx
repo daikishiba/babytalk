@@ -19,7 +19,7 @@ const ChatApp: React.FC = () => {
   const handleChatSubmit = async () => {
     if (!nickname) return;
 
-    const themes = ["かわいい動物", "かっこいい乗り物", "おいしい食べ物"];
+    const themes = ["かわいい動物", "外国", "おいしい食べ物"];
     const randomNumber = Math.floor(Math.random() * 9) + 1;
     const theme = themes[randomNumber % 3];
 
@@ -111,20 +111,23 @@ const ChatApp: React.FC = () => {
         placeholder="子供の愛称を入力してください"
       />
 	  <p className={styles.conversationCount}>現在の会話回数: {conversationCount}</p>
+	  {conversationCount !== undefined && conversationCount >= 50 && (
+        <p className={styles.conversationCount}>会話回数が上限に達しました。</p>)}
       <button 
         onClick={handleChatSubmit} 
         className={`${styles.button} ${loadingChat ? styles.blinking : ''}`}
-        disabled={loadingChat}
+        disabled={loadingChat || (conversationCount !== undefined && conversationCount >= 50)}
       >
         {loadingChat ? '生成中...' : '話しかける'}
       </button>
+	  
       {message && (
         <div className={styles.message_section}>
           <p>{message}</p>
           <button 
             onClick={handleAudioSubmit} 
             className={`${styles.button} ${loadingAudio ? styles.blinking : ''}`}
-            disabled={loadingAudio}
+            disabled={loadingAudio || (conversationCount !== undefined && conversationCount >= 50)}
           >
             {loadingAudio ? '音声生成中...' : '音声を生成'}
           </button>

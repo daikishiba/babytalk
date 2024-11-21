@@ -27,8 +27,27 @@ export default function LoginPage() {
     }
   }, [])
 
+  const [isLoading, setIsLoading] = useState(false); // ローディング状態
+  const [action, setAction] = useState<null | 'login' | 'signup'>(null); // 現在のアクション
+
+  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    setIsLoading(true);
+    try {
+      if (action === 'login') {
+        await login(formData, recaptchaToken);
+      } else if (action === 'signup') {
+        await signup(formData, recaptchaToken);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleFormSubmit}>
       <label className={styles.label} htmlFor="email">Email:</label>
       <input  
         className={styles.input}
@@ -46,10 +65,22 @@ export default function LoginPage() {
       />
       <button
         className={styles.button}
-        formAction={(formData) => signup(formData, recaptchaToken)}>Sign up</button>
+        type="submit"
+        disabled={isLoading && action === 'login'}
+        onClick={() => setAction('login')}
+      >
+        {isLoading && action === 'login' ? 'Logging in...' : 'Log in'}
+      </button>
+
+      {/* サインアップボタン */}
       <button
         className={styles.button}
-        formAction={(formData) => login(formData, recaptchaToken)}>Log in</button>
+        type="submit"
+        disabled={isLoading && action === 'signup'}
+        onClick={() => setAction('signup')}
+      >
+        {isLoading && action === 'signup' ? 'Signing up...' : 'Sign up'}
+      </button>
     </form>
-  )
+  );
 }

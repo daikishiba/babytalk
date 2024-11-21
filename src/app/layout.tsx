@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server"
 
 export const metadata = {
   title: 'babytalkwithai',
-  description: 'generate conversation for baby by AI',
+  description: 'generate conversations for a baby using AI',
   icons: {
     icon: "/favicon.ico", // `public`フォルダのルートからのパス
   },

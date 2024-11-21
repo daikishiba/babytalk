@@ -56,9 +56,7 @@ export default function Home() {
 						また育児✖️AIに興味があり、一緒にWebアプリケーションやデバイスの開発に携わっていただける方からのご連絡もお待ちしています。<br/><br/>
 					</p>
 					<div className="mt-8 flex items-center">
-						<a href="mailto:babytalkai@gmail.com" className="text-blue-600 hover:underline">
-							babytalkai@gmail.com
-						</a>
+						babytalkai@gmail.com
 					</div>
 				</div>
 			</section>

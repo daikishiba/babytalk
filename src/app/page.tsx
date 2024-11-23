@@ -43,6 +43,7 @@ export default function Home() {
 						Baby Talk with AIは育児休暇を取得した非エンジニアが独学で開発を学び、育児の合間に作成したWebアプリケーションです。<br/><br/>
 						風邪をひいて声が出なくなった際に、代わりに子供に話しかけて楽しませてくれる存在が欲しいと思い、開発をスタートしました。<br/><br/>
 						育児をされている方々に少しでも癒しを与え、手助けになれば幸いです。<br/><br/>
+						開発の経緯を記載したNote記事は<a href="https://note.com/ds321/n/n37b54d807f59" target="_blank" rel="noopener noreferrer">こちら</a>
 					</p>
 					<img src='/samplepic.png' alt="sample picture of chat bot" className={styles.samplepic}/>
 				</div>
